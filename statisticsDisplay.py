@@ -1,13 +1,10 @@
 import json
-import os
-import sys
 import webbrowser
 
-def main():
-    gen_path = os.path.dirname(os.path.realpath(sys.argv[0]))
-    f = open(f"{gen_path}\\gachaData.json", "r", encoding="utf-8")
-    j = json.load(f)
-    f.close()
+
+def showData(datafile):
+    with open(datafile, "r", encoding="utf-8") as f:
+        j = json.load(f)
 
     html = """<!DOCTYPE html>
 <html>
@@ -20,9 +17,9 @@ def main():
   <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.min.js"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.css"/>
-  <script src="./vue.js"></script>
-  <link rel="stylesheet" href="./github-markdown.css"/>
-  <link rel="stylesheet" href="./bootstrap.css">
+  <script src="./resources/vue.js"></script>
+  <link rel="stylesheet" href="./resources/github-markdown.css"/>
+  <link rel="stylesheet" href="./resources/bootstrap.css">
   <style>
     [v-cloak] {
       display: none;
@@ -84,7 +81,7 @@ def main():
       </div>
   </div>
   <script>
-    gachaData = """+json.dumps(j)+"""
+    gachaData = """ + json.dumps(j) + """
     for (key in gachaData.gachaLog) {
       gachaData.gachaLog[key].reverse()
     }
@@ -246,12 +243,12 @@ def main():
 </body>
 
 </html>"""
-    
-    with open(f"{gen_path}\\gachaReport.html", "w", encoding="utf-8") as f:
+
+    with open(f"gachaReport.html", "w", encoding="utf-8") as f:
         f.write(html)
 
     webbrowser.open_new_tab('gachaReport.html')
 
-if __name__ == "__main__":
-    main()
 
+if __name__ == "__main__":
+    showData("gachaData.json")

@@ -3,7 +3,7 @@ import zipfile
 import requests
 from config import Config
 
-f = open("verison.txt")
+f = open("version.txt")
 verison = f.read()
 f.close()
 f = open(".\\dist\\config.json", "w", encoding="utf-8")

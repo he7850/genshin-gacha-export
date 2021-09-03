@@ -13,7 +13,7 @@ class Config:
             self.setting = json.loads(f.read())
             f.close()
         except Exception as e:
-            print("配置文件出错",e)
+            print("配置文件出错", e)
             input("请经解压后运行或重新下载")
             exit()
 
@@ -39,4 +39,3 @@ class Config:
         f = open(self.path, "w", encoding="utf-8")
         f.write(settingstr)
         f.close()
-

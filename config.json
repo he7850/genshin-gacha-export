@@ -1,0 +1,6 @@
+{
+  "FLAG_SHOW_REPORT": "true",
+  "FLAG_USE_LOG_URL": "true",
+  "FLAG_WRITE_XLSX": "true",
+  "version": "v2.1.0"
+}
