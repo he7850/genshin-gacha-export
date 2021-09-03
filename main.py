@@ -206,7 +206,6 @@ if __name__ == "__main__":
     latestVersion = requests.get(latest, proxies=request.getproxies()).text
     print(latestVersion)
 
-    print(version)
     if version != latestVersion:
         print(f"当前版本不是最新，请到 https://github.com/he7850/genshin-gacha-export/releases 下载最新版本{latestVersion}")
 
