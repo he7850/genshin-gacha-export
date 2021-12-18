@@ -124,6 +124,17 @@ def getGachaLogs(url, gachaTypeId, gachaTypeDict):
         res = requests.get(api)
         content = res.content.decode("utf-8")
         dataObj = json.loads(content)
+        retry = 0
+        while not dataObj:
+            res = requests.get(api)
+            content = res.content.decode("utf-8")
+            dataObj = json.loads(content)
+            retry += 1
+            if retry > 5:
+                print(f"{gachaTypeDict[gachaTypeId]}抽卡记录读取中断，一共{len(gachaList)}条")
+                break
+        if not dataObj and not dataObj["data"]:
+            break
         gachaEntries = dataObj["data"]["list"]
         if not len(gachaEntries):
             print(f"{gachaTypeDict[gachaTypeId]}抽卡记录读取完毕，一共{len(gachaList)}条")
@@ -131,6 +142,7 @@ def getGachaLogs(url, gachaTypeId, gachaTypeDict):
         for gachaEntry in gachaEntries:
             gachaList.append(gachaEntry)
         end_id = gachaEntries[-1]["id"]
+        time.sleep(0.5)
 
     return gachaList
 
@@ -272,7 +284,9 @@ if __name__ == "__main__":
         print("错误：链接不合法，请打开原神抽卡历史记录，浏览翻页后再使用本程序")
         exit()
 
-    try:
-        parseGachaLogFromUrl(url)
-    except Exception as e:
-        print("日志读取出错:", e)
+    # try:
+    parseGachaLogFromUrl(url)
+    # except Exception as e:
+    #     import traceback
+    #     traceback.print_stack()
+    #     print("日志读取出错:", e)
