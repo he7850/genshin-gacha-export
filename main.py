@@ -255,9 +255,9 @@ if __name__ == "__main__":
                     flag = False
 
         if not os.path.isfile(output_log_path):
-            print("错误：日志文件已被清除")
+            print(f"错误：日志文件 {output_log_path} 已被清除")
         else:
-            print("提取日志文件中的链接...")
+            print(f"提取日志文件 {output_log_path} 中的链接...")
             # with open(output_log_path, "r", encoding="utf-8") as f:
             with open(output_log_path, "r", encoding="mbcs", errors="ignore") as f:
                 log = f.readlines()
